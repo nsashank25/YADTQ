@@ -49,10 +49,10 @@ Start one or more workers to process tasks:
 
 ```bash
 # Start worker with default ID
-python worker.py
+python worker_code.py
 
 # Start worker with custom ID
-python worker.py worker-001
+python worker_code.py worker-001
 ```
 
 ### 2. Monitor Worker Health
@@ -60,14 +60,14 @@ python worker.py worker-001
 Track worker status in real-time:
 
 ```bash
-python heartbeat.py
+python heartbeat_monitor.py
 ```
 
 ### 3. Submit Tasks
 
 #### Using the Interactive GUI:
 ```bash
-python client.py
+python client_code.py
 ```
 
 #### Using Python API:
@@ -99,20 +99,20 @@ Main interface for task submission and monitoring:
 - `value(task_id)`: Get task result
 - `get_worker_status()`: Get worker health information
 
-### Worker (`worker.py`)
+### Worker (`worker_code.py`)
 Processes tasks from the Kafka queue:
 - Supports task types: `add`, `sub`, `multiply`, `divide`
 - Automatic retry mechanism (up to 3 attempts)
 - Heartbeat reporting every 5 seconds
 - Configurable processing time simulation
 
-### Redis Backend (`redis_backend.py`)
+### Redis Backend (`redis_storage.py`)
 Handles persistent storage:
 - Task status and results
 - Worker heartbeat tracking
 - Thread-safe operations
 
-### Terminal GUI (`client.py`)
+### Terminal GUI (`client_code.py`)
 Interactive interface for:
 - Adding new tasks
 - Viewing task status and results
@@ -150,7 +150,7 @@ failed (after max retries)
 ## Monitoring 
 
 ### Worker Status
-Use `heartbeat.py` to monitor worker health:
+Use `heartbeat_monitor.py` to monitor worker health:
 - **alive**: Worker is responding normally
 - **unresponsive**: Worker hasn't sent heartbeat in >15 seconds
 
@@ -170,8 +170,8 @@ yadtq.display_worker_status()
 ### Adding Workers
 Simply start additional worker processes:
 ```bash
-python worker.py worker-002
-python worker.py worker-003
+python worker_code.py worker-002
+python worker_code.py worker-003
 # ... and so on
 ```
 
